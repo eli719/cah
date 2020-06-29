@@ -1,0 +1,33 @@
+{
+	"templete": {
+		"directory": "D:/XJPFile/auto/",
+		"bakDir": "D:/XJPFile/bak/",
+		"filePattern": "{type}{orgCode}_{orgName}_{yyyyMMdd}"
+	},
+	"customers": [
+		{
+			"orgCode": "1234",
+			"orgName": "青岛百洋医药股份有限公司",
+			"url": "http://www.baheal.com/Flow/Home/Index",
+			"params": {
+				"user": "240",
+				"password": "Welcome103"
+			},
+			"execTime": "0 3 1-17 * * ?",
+			"merge": false,
+			"fileName": ""
+		},
+		{
+			"orgCode": "2345",
+			"orgName": "江苏华晓医药物流有限公司",
+			"url": "http://112.11.203.72:30/Login.aspx",
+			"params": {
+				"tbLoginName": "xays",
+				"tbPassword": "hsyy2014"
+			},
+			"execTime": "0 0 1-17 * * ?",
+			"merge": false,
+			"fileName": ""
+		}
+	]
+}
