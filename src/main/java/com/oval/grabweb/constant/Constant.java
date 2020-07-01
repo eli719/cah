@@ -1,7 +1,11 @@
 package com.oval.grabweb.constant;
 
 import com.oval.grabweb.util.DateUtils;
-
+/**
+ *	全局常量
+ * @author eli
+ *
+ */
 public interface Constant {
 
 	String STOCK = "V";

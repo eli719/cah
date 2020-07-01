@@ -1,4 +1,5 @@
 package com.oval.grabweb.component;
+
 /**
  * Page类
  * 1.保存登录成功的客户端信息
@@ -24,7 +25,6 @@ public class Page {
 	
 	private Response response;
 	
-	private boolean isLogin;
 	
 	private List<Boolean> status = new ArrayList<Boolean>();
 	
@@ -63,13 +63,6 @@ public class Page {
 		this.client = client;
 	}
 
-	public boolean isLogin() {
-		return isLogin;
-	}
-
-	public void setLogin(boolean isLogin) {
-		this.isLogin = isLogin;
-	}
 
 	public Object getStock() {
 		return stock;

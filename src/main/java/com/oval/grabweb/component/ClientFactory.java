@@ -25,7 +25,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
-
+/**
+ * 	创建 CloseableHttpClient的工厂类
+ * @author eli
+ *
+ */
 public class ClientFactory {
 
     static final int timeOut = 10 * 1000;

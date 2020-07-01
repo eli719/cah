@@ -11,7 +11,7 @@ import com.oval.grabweb.impl.Code2345Impl;
 /**
  * AppliactionContext类 1.全局配置信息
  * 
- * @author user
+ * @author eli
  *
  */
 public class AppliactionContext {

@@ -2,8 +2,6 @@ package com.oval.grabweb.component;
 
 import java.util.Map;
 
-import org.apache.http.Header;
-
 /**
  * Request类
  * 1.保存一个请求的信息

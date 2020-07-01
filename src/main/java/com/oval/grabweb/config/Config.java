@@ -15,7 +15,11 @@ import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-
+/**
+ * 	配置类
+ * @author eli
+ *
+ */
 public class Config {
 
 	private static String DIR_PRIFIX;
@@ -78,7 +82,7 @@ public class Config {
 	}
 
 	/**
-	 * 
+	 * 	读取配置文件获取所有商业信息并保存
 	 */
 	private void getCustomer() {
 		URL u = this.getClass().getResource("/task.json");
@@ -101,7 +105,14 @@ public class Config {
 			customers.put(c.getOrgCode(), c);
 		}
 	}
-
+	
+	/**
+	 * 	生成合并文件夹名称
+	 * @param fileName 文件夹名
+	 * @param orgCode
+	 * @param orgName
+	 * @return
+	 */
 	public static String mergeDir(String fileName, String orgCode, String orgName) {
 		if (!StringUtils.isEmpty(fileName)) {
 			fileName = fileName.replace("{orgCode}", orgCode);
@@ -111,7 +122,14 @@ public class Config {
 		}
 		return fileName;
 	}
-
+	
+	/**
+	 * 	生成目标文件名
+	 * @param fileName
+	 * @param orgCode
+	 * @param orgName
+	 * @return
+	 */
 	public static String getFileName(String fileName, String orgCode, String orgName) {
 		if (!StringUtils.isEmpty(fileName)) {
 			fileName = fileName.replace("{orgCode}", orgCode);
@@ -122,7 +140,7 @@ public class Config {
 	}
 
 	/**
-	 * 
+	 * 	获取表头
 	 */
 	@SuppressWarnings("unchecked")
 	private void getTitle() {

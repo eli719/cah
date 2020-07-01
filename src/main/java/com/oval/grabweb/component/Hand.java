@@ -8,6 +8,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.log4j.Logger;
+
 import com.alibaba.excel.EasyExcelFactory;
 import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.config.Config;
@@ -24,6 +26,9 @@ import cn.hutool.poi.excel.ExcelWriter;
  *
  */
 public class Hand {
+	
+	private static Logger logger = Logger.getLogger(Hand.class);
+
 
 	private Paw paw;
 
@@ -47,14 +52,14 @@ public class Hand {
 
 	public void exec() {
 		// 1.登录
-		paw.login(page);
+		boolean isLogin = paw.login(page);
 		Customer customer = page.getCustomer();
-		System.out.println("-----------" + page.isLogin());
-		ExecutorService e = Executors.newFixedThreadPool(3);
-		// 2.登录成功后
-		if (page.isLogin()) {
+		logger.info("-----------" + isLogin);
+		ExecutorService e = Executors.newFixedThreadPool(4);
+		// 2.登录成功后，可以异步获取进销存数据
+		if (isLogin) {
 			try {
-
+				//1.库存
 				CompletableFuture<Boolean> c1 = CompletableFuture.supplyAsync(() -> {
 					paw.stock(page);
 
@@ -71,7 +76,8 @@ public class Hand {
 					}
 					return true;
 				}, e);
-
+				
+				//2.销售
 				CompletableFuture<Boolean> c2 = CompletableFuture.supplyAsync(() -> {
 					paw.sale(page);
 					if (customer.isMerge()) {
@@ -89,6 +95,7 @@ public class Hand {
 					return true;
 				}, e);
 
+				//3.采购
 				CompletableFuture<Boolean> c3 = CompletableFuture.supplyAsync(() -> {
 					paw.purchase(page);
 
@@ -106,40 +113,59 @@ public class Hand {
 					}
 					return true;
 				}, e);
-
+				
+				//4.3个任务完成后，处理需要合并的多账号文件
 				CompletableFuture.allOf(c1, c2, c3).thenRunAsync(() -> {
-					System.out.println("the last");
+					logger.info("the last");
+					//判断是否合并
 					if (customer.isMerge()) {
+						
+						//获取合并文件夹名称
 						String mergeDir = customer.getFileName().replaceAll("ONE", "").replaceAll("TWO", "");
+						
 						boolean b = FileUtil.exist(mergeDir);
+						//合并文件夹要存在
 						if (!b) {
 							return;
 						}
+						//合并文件夹不能为空
 						if (FileUtil.isDirEmpty(new File(mergeDir))) {
 							return;
 						}
-
+						//创建子文件
 						createFiles(mergeDir, Constant.STOCK, customer);
 						createFiles(mergeDir, Constant.SALE, customer);
 						createFiles(mergeDir, Constant.PURCHASE, customer);
 					}
 				}, e).get();
+				
+				//关闭线程池
 				e.shutdown();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
-
+	
+	/**
+	 * 	生成目标文件
+	 * @param fileName  目标文件名
+	 * @param customer  商业
+	 * @param type	 	文件进销存类型
+	 */
 	private void normalCreateFiles(String fileName, Customer customer, String type) {
-		
+		//1.检查目标文件是否存在
 		if(FileUtil.exist(fileName)) {
-			System.out.println(fileName+"---已存在！！");
+			logger.info(fileName+"---已存在！！");
 			return;
 		}
 		
+		//2.获取表头
+		
 		List<Integer> l = paw.titleNo();
 		List<List<String>> data = new ArrayList<>();
+		
+		//3.根据类型获取数据
 		switch (type) {
 		case Constant.STOCK:
 			data.add(Config.stockHead.get(l.get(0)));
@@ -154,6 +180,9 @@ public class Hand {
 			data.addAll((List<List<String>>) page.getPurchase());
 			break;
 		}
+		
+		//4.向目标文件写入数据
+		
 		try {
 			FileUtil.touch(fileName);
 //			FileUtils.touch(new File(fileName));
@@ -165,12 +194,23 @@ public class Hand {
 		}
 		page.getStatus().set(0, true);
 	}
-
+	
+	/**
+	 * 	创建合并后的文件
+	 * @param mergeDir 合并文件夹
+	 * @param type	类型
+	 * @param customer	商业
+	 */
 	private static void createFiles(String mergeDir, String type, Customer customer) {
+		//1.先从合并的文件夹中获取所需类型的子文件
+		
 		List<File> files = FileUtil.loopFiles(new File(mergeDir), FileFilterUtils.prefixFileFilter(type));
+		
+		//2.单个类型子文件数量从2个起步代表起码2个账号合并
 		if (!(files.size() >= 2)) {
 			return;
 		}
+		//3.获取子文件数据
 		List<List<Object>> data = new ArrayList<List<Object>>();
 		for (int i = 0; i < files.size(); i++) {
 			if (i == 0) {
@@ -181,7 +221,7 @@ public class Hand {
 				data.addAll(s);
 			}
 		}
-
+		//{type}{orgCode}_{yyyyMMdd}_{orgName}.xls
 		String sumFile = Config
 				.getFileName(Config.getDIR_PRIFIX() + Config.getFILENAME_REGEX(),
 						customer.getOrgCode().replaceAll("ONE", "").replaceAll("TWO", ""), customer.getOrgName())

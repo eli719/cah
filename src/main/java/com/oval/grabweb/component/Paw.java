@@ -14,7 +14,7 @@ public interface Paw {
 
 	public List<Integer> titleNo();
 	
-	public void login(Page page);
+	public boolean login(Page page);
 	
 	public Page stock(Page page);
 	

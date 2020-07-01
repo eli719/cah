@@ -71,7 +71,7 @@ public class Code1234Impl implements Paw {
 	}
 
 	@Override
-	public void login(Page page) {
+	public boolean login(Page page) {
 		System.out.println("--------login------------");
 		CloseableHttpClient client = page.getClient();
 		System.out.println("client:"+client);
@@ -96,7 +96,7 @@ public class Code1234Impl implements Paw {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		page.setLogin(true);
+		return true;
 	}
 
 	@Override
