@@ -10,8 +10,8 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.oval.grabweb.action.ActionFacade;
-import com.oval.grabweb.action.ClientFactory;
+import com.oval.grabweb.component.ActionFacade;
+import com.oval.grabweb.component.ClientFactory;
 import com.oval.grabweb.constant.Constant;
 
 import cn.hutool.core.io.FileUtil;

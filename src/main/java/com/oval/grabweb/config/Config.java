@@ -1,21 +1,16 @@
 package com.oval.grabweb.config;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 
-import com.oval.grabweb.action.Customer;
-import com.oval.grabweb.constant.Constant;
+import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.util.DateUtils;
-
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -24,6 +19,22 @@ import cn.hutool.json.JSONUtil;
 public class Config {
 
 	private static String DIR_PRIFIX;
+
+	public static String getDIR_PRIFIX() {
+		return DIR_PRIFIX;
+	}
+
+	public static void setDIR_PRIFIX(String dIR_PRIFIX) {
+		DIR_PRIFIX = dIR_PRIFIX;
+	}
+
+	public static String getBAK_PRIFIX() {
+		return BAK_PRIFIX;
+	}
+
+	public static void setBAK_PRIFIX(String bAK_PRIFIX) {
+		BAK_PRIFIX = bAK_PRIFIX;
+	}
 
 	private static String BAK_PRIFIX;
 
@@ -82,12 +93,26 @@ public class Config {
 		for (int i = 0; i < array.size(); i++) {
 			JSONObject cu = (JSONObject) array.get(i);
 			Customer c = JSONUtil.toBean(cu, Customer.class);
-			c.setFileName(getFileName(FILE_NAME, c.getOrgCode(), c.getOrgName()));
+			if (c.isMerge()) {
+				c.setFileName(mergeDir(DIR_PRIFIX + FILENAME_REGEX, c.getOrgCode(), c.getOrgName()));
+			} else {
+				c.setFileName(getFileName(FILE_NAME, c.getOrgCode(), c.getOrgName()));
+			}
 			customers.put(c.getOrgCode(), c);
 		}
 	}
 
-	private String getFileName(String fileName, String orgCode, String orgName) {
+	public static String mergeDir(String fileName, String orgCode, String orgName) {
+		if (!StringUtils.isEmpty(fileName)) {
+			fileName = fileName.replace("{orgCode}", orgCode);
+			fileName = fileName.replace("{orgName}", orgName);
+			fileName = fileName.replace("_{yyyyMMdd}", "");
+			fileName = fileName.replace("{type}", "");
+		}
+		return fileName;
+	}
+
+	public static String getFileName(String fileName, String orgCode, String orgName) {
 		if (!StringUtils.isEmpty(fileName)) {
 			fileName = fileName.replace("{orgCode}", orgCode);
 			fileName = fileName.replace("{orgName}", orgName);
@@ -117,7 +142,6 @@ public class Config {
 			purchaseHead.add((List<String>) o);
 		}
 	}
-
 
 	public static Map<String, Customer> getCustomers() {
 		return customers;

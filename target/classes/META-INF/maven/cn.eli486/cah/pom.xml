@@ -5,7 +5,7 @@
 	<groupId>cn.eli486</groupId>
 	<artifactId>cah</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cahwe</name>
+	<name>cah</name>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>

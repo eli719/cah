@@ -2,8 +2,6 @@ package com.oval.grabweb.constant;
 
 import com.oval.grabweb.util.DateUtils;
 
-import cn.hutool.core.date.DateUtil;
-
 public interface Constant {
 
 	String STOCK = "V";

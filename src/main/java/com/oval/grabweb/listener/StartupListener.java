@@ -21,7 +21,8 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
-import com.oval.grabweb.action.Customer;
+
+import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.config.Config;
 import com.oval.grabweb.job.AbstractJob;
 import com.oval.grabweb.job.CopyFileJob;
@@ -125,6 +126,7 @@ public class StartupListener implements ServletContextListener {
         	jobInfo.setOrgName(customer.getOrgName());
         	jobInfo.setExecTime(customer.getExecTime());
         	jobInfo.setParams(customer.getParams());
+        	jobInfo.setFileName(customer.getFileName());
         	
         	// 同一时间启动的事务放在一起
     		if(map.containsKey(customer.getExecTime())){

@@ -1,28 +1,21 @@
-/**   
-* @Company: LuxonData 
-* @Title: jobInfo.java 
-* @Package com.oval.grabweb.job 
-* @Description: TODO
-* @author yaokaichang  
-* @date 2015-1-27 下午03:15:28 
-* @version V1.0   
-*/ 
-package com.oval.grabweb.job;
+package com.oval.grabweb.bean;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class JobInfo {
+public class Customer {
 	
 	private String orgCode;
 	
 	private String orgName;
 	
-	private boolean merge;
+	private String url;
 	
-	private Map<String, String> params = new HashMap<String, String>();
+	private Map<String,String> params = new HashMap<String, String>();
 	
 	private String execTime;
+	
+	private boolean merge;
 	
 	private String fileName;
 
@@ -42,12 +35,12 @@ public class JobInfo {
 		this.orgName = orgName;
 	}
 
-	public boolean isMerge() {
-		return merge;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setMerge(boolean merge) {
-		this.merge = merge;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Map<String, String> getParams() {
@@ -64,6 +57,14 @@ public class JobInfo {
 
 	public void setExecTime(String execTime) {
 		this.execTime = execTime;
+	}
+
+	public boolean isMerge() {
+		return merge;
+	}
+
+	public void setMerge(boolean merge) {
+		this.merge = merge;
 	}
 
 	public String getFileName() {
