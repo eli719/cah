@@ -7,7 +7,7 @@ import com.oval.grabweb.config.Config;
 /**
  * Paw接口
  * 1.抓取所需数据
- * @author user
+ * @author eli
  *
  */
 public interface Paw {

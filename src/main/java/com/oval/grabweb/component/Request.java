@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Request类
  * 1.保存一个请求的信息
- * @author user
+ * @author eli
  *
  */
 public class Request {

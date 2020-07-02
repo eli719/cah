@@ -22,7 +22,11 @@ import org.apache.http.util.EntityUtils;
 
 import com.oval.grabweb.component.Request;
 import com.oval.grabweb.component.Response;
-
+/**
+ * 	HTTP工具类
+ * @author eli
+ *
+ */
 public class HttpUtils {
 
 	public static Response get(CloseableHttpClient client, Request request) {

@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Response类
  * 1.保存一个响应的信息
- * @author user
+ * @author eli
  *
  */
 public class Response {

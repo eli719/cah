@@ -153,6 +153,7 @@ public class Hand {
 	 * @param customer  商业
 	 * @param type	 	文件进销存类型
 	 */
+	@SuppressWarnings("unchecked")
 	private void normalCreateFiles(String fileName, Customer customer, String type) {
 		//1.检查目标文件是否存在
 		if(FileUtil.exist(fileName)) {

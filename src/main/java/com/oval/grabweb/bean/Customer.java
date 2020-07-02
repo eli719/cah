@@ -3,6 +3,11 @@ package com.oval.grabweb.bean;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 	商业实体类
+ * @author eli
+ *
+ */
 public class Customer {
 	
 	private String orgCode;

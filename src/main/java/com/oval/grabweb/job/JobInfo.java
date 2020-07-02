@@ -1,17 +1,13 @@
-/**   
-* @Company: LuxonData 
-* @Title: jobInfo.java 
-* @Package com.oval.grabweb.job 
-* @Description: TODO
-* @author yaokaichang  
-* @date 2015-1-27 下午03:15:28 
-* @version V1.0   
-*/ 
 package com.oval.grabweb.job;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 	任务实体类
+ * @author eli
+ *
+ */
 public class JobInfo {
 	
 	private String orgCode;

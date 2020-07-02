@@ -91,8 +91,8 @@ public class Config {
 		Config.setFILENAME_REGEX(o.getStr("filePattern"));
 		Config.DIR_PRIFIX = o.getStr("directory") + DateUtils.yesterday() + "/";
 		Config.BAK_PRIFIX = o.getStr("bakDir") + DateUtils.yesterday() + "/";
-		Config.setFILE_NAME(DIR_PRIFIX + FILENAME_REGEX + ".xls");
-		Config.setBAKFILE_NAME(BAK_PRIFIX + FILENAME_REGEX + ".xls");
+		Config.FILE_NAME=(DIR_PRIFIX + FILENAME_REGEX + ".xls");
+		Config.BAKFILE_NAME=(BAK_PRIFIX + FILENAME_REGEX + ".xls");
 		JSONArray array = (JSONArray) j.getByPath("customers");
 		for (int i = 0; i < array.size(); i++) {
 			JSONObject cu = (JSONObject) array.get(i);

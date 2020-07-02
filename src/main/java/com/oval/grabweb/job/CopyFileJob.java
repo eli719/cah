@@ -9,7 +9,11 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import cn.hutool.core.io.FileUtil;
-
+/**
+ * 	定时拷贝任务
+ * @author eli
+ *
+ */
 public class CopyFileJob implements Job {
 
 	private static Logger logger = Logger.getLogger(CopyFileJob.class);
@@ -24,7 +28,7 @@ public class CopyFileJob implements Job {
 	}
 
 	private static void doCopy(String rootSrc, String rootDest) {
-		FileUtil.copyContent(new File("d:/XJPFile/auto/"), new File("d:/XJPFile/bak"), true);
+		FileUtil.copyContent(new File(rootSrc), new File(rootDest), true);
 	}
 
 	private static void doDelete(String rootSrc) {
