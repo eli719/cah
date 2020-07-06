@@ -24,7 +24,7 @@ public  class AbstractJob implements Job {
 		JobDataMap dataMap = context.getJobDetail().getJobDataMap();
  	    @SuppressWarnings("unchecked")
 		List<JobInfo>  jobInfoList = (List<JobInfo>) dataMap.get("jobInfoList"); 
- 	    FileUtil.mkParentDirs(Config.getDIR_PRIFIX());
+ 	    FileUtil.mkParentDirs(Config.DIR_PRIFIX);
 		try {
 			ActionFacade.doActions(jobInfoList);
 		} catch (Exception e) {

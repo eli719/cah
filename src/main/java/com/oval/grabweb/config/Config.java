@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
-
 import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.util.DateUtils;
 import cn.hutool.json.JSON;
@@ -22,41 +21,18 @@ import cn.hutool.json.JSONUtil;
  */
 public class Config {
 
-	private static String DIR_PRIFIX;
+	public static String DIR_PRIFIX;
 
-	public static String getDIR_PRIFIX() {
-		return DIR_PRIFIX;
-	}
 
-	public static void setDIR_PRIFIX(String dIR_PRIFIX) {
-		DIR_PRIFIX = dIR_PRIFIX;
-	}
+	public static String BAK_PRIFIX;
 
-	public static String getBAK_PRIFIX() {
-		return BAK_PRIFIX;
-	}
+	public static String FILENAME_REGEX;
 
-	public static void setBAK_PRIFIX(String bAK_PRIFIX) {
-		BAK_PRIFIX = bAK_PRIFIX;
-	}
+	public static String FILE_NAME;
 
-	private static String BAK_PRIFIX;
+	public static String BAKFILE_NAME;
 
-	private static String FILENAME_REGEX;
-
-	public static String getFILENAME_REGEX() {
-		return FILENAME_REGEX;
-	}
-
-	public static void setFILENAME_REGEX(String fILENAME_REGEX) {
-		FILENAME_REGEX = fILENAME_REGEX;
-	}
-
-	private static String FILE_NAME;
-
-	private static String BAKFILE_NAME;
-
-	private final static Map<String, Customer> customers = new HashMap<String, Customer>();
+	public final static Map<String, Customer> customers = new HashMap<String, Customer>();
 
 	public static final List<List<String>> stockHead = new ArrayList<>();
 
@@ -64,13 +40,6 @@ public class Config {
 
 	public static final List<List<String>> purchaseHead = new ArrayList<>();
 
-	public List<List<String>> getStockHead() {
-		return stockHead;
-	}
-
-	public List<List<String>> getSaleHead() {
-		return saleHead;
-	}
 
 	public Config() {
 		init();
@@ -88,7 +57,7 @@ public class Config {
 		URL u = this.getClass().getResource("/task.json");
 		JSON j = cn.hutool.json.JSONUtil.readJSON(new File(u.getFile()), Charset.defaultCharset());
 		JSONObject o = (JSONObject) j.getByPath("templete");
-		Config.setFILENAME_REGEX(o.getStr("filePattern"));
+		Config.FILENAME_REGEX=o.getStr("filePattern");
 		Config.DIR_PRIFIX = o.getStr("directory") + DateUtils.yesterday() + "/";
 		Config.BAK_PRIFIX = o.getStr("bakDir") + DateUtils.yesterday() + "/";
 		Config.FILE_NAME=(DIR_PRIFIX + FILENAME_REGEX + ".xls");
@@ -165,20 +134,5 @@ public class Config {
 		return customers;
 	}
 
-	public static String getFILE_NAME() {
-		return FILE_NAME;
-	}
-
-	public static void setFILE_NAME(String fILE_NAME) {
-		FILE_NAME = fILE_NAME;
-	}
-
-	public static String getBAKFILE_NAME() {
-		return BAKFILE_NAME;
-	}
-
-	public static void setBAKFILE_NAME(String bAKFILE_NAME) {
-		BAKFILE_NAME = bAKFILE_NAME;
-	}
 
 }

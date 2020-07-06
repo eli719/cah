@@ -66,7 +66,7 @@ public class Hand {
 					if (customer.isMerge()) {
 						String childDir = customer.getFileName().replace("{type}", "");
 						String childFileName = childDir.replaceAll("ONE", "").replaceAll("TWO", "") + "/" + Config
-								.getFileName(Config.getFILENAME_REGEX(), customer.getOrgCode(), customer.getOrgName())
+								.getFileName(Config.FILENAME_REGEX, customer.getOrgCode(), customer.getOrgName())
 								.replace("{type}", Constant.STOCK) + ".xls";
 						normalCreateFiles(childFileName, customer, Constant.STOCK);
 					} else {
@@ -83,7 +83,7 @@ public class Hand {
 					if (customer.isMerge()) {
 						String childDir = customer.getFileName().replace("{type}", "");
 						String childFileName = childDir.replaceAll("ONE", "").replaceAll("TWO", "") + "/" + Config
-								.getFileName(Config.getFILENAME_REGEX(), customer.getOrgCode(), customer.getOrgName())
+								.getFileName(Config.FILENAME_REGEX, customer.getOrgCode(), customer.getOrgName())
 								.replace("{type}", Constant.SALE) + ".xls";
 
 						normalCreateFiles(childFileName, customer, Constant.SALE);
@@ -102,7 +102,7 @@ public class Hand {
 					if (customer.isMerge()) {
 						String childDir = customer.getFileName().replace("{type}", "");
 						String childFileName = childDir.replaceAll("ONE", "").replaceAll("TWO", "") + "/" + Config
-								.getFileName(Config.getFILENAME_REGEX(), customer.getOrgCode(), customer.getOrgName())
+								.getFileName(Config.FILENAME_REGEX, customer.getOrgCode(), customer.getOrgName())
 								.replace("{type}", Constant.PURCHASE) + ".xls";
 
 						normalCreateFiles(childFileName, customer, Constant.PURCHASE);
@@ -224,7 +224,7 @@ public class Hand {
 		}
 		//{type}{orgCode}_{yyyyMMdd}_{orgName}.xls
 		String sumFile = Config
-				.getFileName(Config.getDIR_PRIFIX() + Config.getFILENAME_REGEX(),
+				.getFileName(Config.DIR_PRIFIX + Config.FILENAME_REGEX,
 						customer.getOrgCode().replaceAll("ONE", "").replaceAll("TWO", ""), customer.getOrgName())
 				.replace("{type}", type) + ".xls";
 		try (FileOutputStream fos = new FileOutputStream(sumFile)) {
