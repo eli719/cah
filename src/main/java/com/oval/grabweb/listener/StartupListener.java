@@ -35,7 +35,7 @@ public class StartupListener implements ServletContextListener {
 	private static Logger logger = Logger.getLogger(StartupListener.class);
 
     public StartupListener() {
-    	Config config = new Config(); 
+    	Config.init();
     }
     
     @Override
@@ -57,7 +57,8 @@ public class StartupListener implements ServletContextListener {
 			logger.error("action.properties error!");
 			e.printStackTrace();
 		} 
-    	String rootSrc = context.getInitParameter("FileDir");
+    	String rootSrc = Config.DIR_PRIFIX;
+    	String rootDest = Config.BAK_PRIFIX;
     	String copyExpr = context.getInitParameter("copyExpr");
     	rootSrc = StringUtils.isEmpty(rootSrc) ? "d:" : rootSrc;
     	FileUtil.touch(rootSrc);
@@ -70,7 +71,7 @@ public class StartupListener implements ServletContextListener {
 		        event.getServletContext().setAttribute("JobScheduler", sche);
 		        createJob(sche, rootSrc,jobInfoList,dailyExpr); 
 			}
-			createCopyJob(sche, rootSrc, rootSrc, copyExpr);
+			createCopyJob(sche, rootSrc, rootDest, copyExpr);
 		} catch (SchedulerException e) {
 			logger.error("生成定时任务出错：" + e.getMessage());
 		}

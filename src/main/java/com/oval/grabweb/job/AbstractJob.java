@@ -8,8 +8,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import com.oval.grabweb.component.ActionFacade;
 import com.oval.grabweb.config.Config;
-import com.oval.grabweb.constant.Constant;
-
+import com.oval.grabweb.util.DateUtils;
 import cn.hutool.core.io.FileUtil;
 /**
  * 	定时任务类
@@ -28,7 +27,7 @@ public  class AbstractJob implements Job {
 		try {
 			ActionFacade.doActions(jobInfoList);
 		} catch (Exception e) {
-			logger.error(Constant.END_DATE+"日报执行过程中出错");
+			logger.error(DateUtils.now()+"日报执行过程中出错");
 			e.printStackTrace();
 		}
 	}

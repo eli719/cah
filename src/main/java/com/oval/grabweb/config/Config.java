@@ -14,15 +14,16 @@ import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+
 /**
- * 	配置类
+ * 配置类
+ * 
  * @author eli
  *
  */
 public class Config {
 
 	public static String DIR_PRIFIX;
-
 
 	public static String BAK_PRIFIX;
 
@@ -40,28 +41,23 @@ public class Config {
 
 	public static final List<List<String>> purchaseHead = new ArrayList<>();
 
-
-	public Config() {
-		init();
-	}
-
-	private void init() {
+	public static void init() {
 		getTitle();
 		getCustomer();
 	}
 
 	/**
-	 * 	读取配置文件获取所有商业信息并保存
+	 * 读取配置文件获取所有商业信息并保存
 	 */
-	private void getCustomer() {
-		URL u = this.getClass().getResource("/task.json");
+	private static void getCustomer() {
+		URL u = Config.class.getResource("/task.json");
 		JSON j = cn.hutool.json.JSONUtil.readJSON(new File(u.getFile()), Charset.defaultCharset());
 		JSONObject o = (JSONObject) j.getByPath("templete");
-		Config.FILENAME_REGEX=o.getStr("filePattern");
+		Config.FILENAME_REGEX = o.getStr("filePattern");
 		Config.DIR_PRIFIX = o.getStr("directory") + DateUtils.yesterday() + "/";
 		Config.BAK_PRIFIX = o.getStr("bakDir") + DateUtils.yesterday() + "/";
-		Config.FILE_NAME=(DIR_PRIFIX + FILENAME_REGEX + ".xls");
-		Config.BAKFILE_NAME=(BAK_PRIFIX + FILENAME_REGEX + ".xls");
+		Config.FILE_NAME = (DIR_PRIFIX + FILENAME_REGEX + ".xls");
+		Config.BAKFILE_NAME = (BAK_PRIFIX + FILENAME_REGEX + ".xls");
 		JSONArray array = (JSONArray) j.getByPath("customers");
 		for (int i = 0; i < array.size(); i++) {
 			JSONObject cu = (JSONObject) array.get(i);
@@ -74,9 +70,10 @@ public class Config {
 			customers.put(c.getOrgCode(), c);
 		}
 	}
-	
+
 	/**
-	 * 	生成合并文件夹名称
+	 * 生成合并文件夹名称
+	 * 
 	 * @param fileName 文件夹名
 	 * @param orgCode
 	 * @param orgName
@@ -91,9 +88,10 @@ public class Config {
 		}
 		return fileName;
 	}
-	
+
 	/**
-	 * 	生成目标文件名
+	 * 生成目标文件名
+	 * 
 	 * @param fileName
 	 * @param orgCode
 	 * @param orgName
@@ -109,11 +107,11 @@ public class Config {
 	}
 
 	/**
-	 * 	获取表头
+	 * 获取表头
 	 */
 	@SuppressWarnings("unchecked")
-	private void getTitle() {
-		URL u = this.getClass().getResource("/title.json");
+	private static void getTitle() {
+		URL u = Config.class.getResource("/title.json");
 		JSON j = cn.hutool.json.JSONUtil.readJSON(new File(u.getFile()), Charset.defaultCharset());
 		JSONArray s = (JSONArray) j.getByPath("stock");
 		for (Object o : s) {
@@ -133,6 +131,5 @@ public class Config {
 	public static Map<String, Customer> getCustomers() {
 		return customers;
 	}
-
 
 }

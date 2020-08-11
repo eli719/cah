@@ -3,6 +3,7 @@ package com.oval.grabweb.component;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -170,6 +171,7 @@ public class Hand {
 		switch (type) {
 		case Constant.STOCK:
 			data.add(Config.stockHead.get(l.get(0)));
+			//List<List<String>>-->对应excel一行每个单元格的值
 			data.addAll((List<List<String>>) page.getStock());
 			break;
 		case Constant.SALE:

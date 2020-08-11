@@ -25,10 +25,8 @@ public class AppliactionContext {
 	}
 
 	public static void main(String[] args) {
-		Config config = new Config(); 
+		Config.init(); 
 		List<Paw> paws = new ArrayList<Paw>();
-		paws.add(new Code1234ONEImpl());
-		paws.add(new Code1234TWOImpl());
 		paws.add(new Code2345Impl());
 		for (Paw paw : paws) {
 			Crawler.create(paw).run();
