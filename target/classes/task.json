@@ -13,7 +13,7 @@
 				"user": "240",
 				"password": "Welcome103"
 			},
-			"execTime": "0 40 1-17 * * ?",
+			"execTime": "0 57 1-17 * * ?",
 			"merge": true,
 			"fileName": ""
 		},

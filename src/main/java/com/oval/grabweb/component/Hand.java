@@ -3,18 +3,17 @@ package com.oval.grabweb.component;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.log4j.Logger;
-
 import com.alibaba.excel.EasyExcelFactory;
 import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.config.Config;
 import com.oval.grabweb.constant.Constant;
+import com.oval.grabweb.vo.CustomerVo;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.poi.excel.ExcelUtil;
@@ -39,7 +38,7 @@ public class Hand {
 
 	}
 
-	public Hand(Customer customer) {
+	public Hand(CustomerVo customer) {
 		this.page = new Page(customer);
 	}
 
@@ -54,7 +53,7 @@ public class Hand {
 	public void exec() {
 		// 1.登录
 		boolean isLogin = paw.login(page);
-		Customer customer = page.getCustomer();
+		Customer customer = page.getCustomer().getCustomer();
 		logger.info("-----------" + isLogin);
 		ExecutorService e = Executors.newFixedThreadPool(4);
 		// 2.登录成功后，可以异步获取进销存数据

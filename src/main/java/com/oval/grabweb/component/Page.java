@@ -15,12 +15,13 @@ import java.util.List;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import com.oval.grabweb.bean.Customer;
+import com.oval.grabweb.vo.CustomerVo;
 
 public class Page {
 	
 	private CloseableHttpClient client;
 	
-	private Customer customer;
+	private CustomerVo customer;
 	
 	private Request request;
 	
@@ -48,7 +49,7 @@ public class Page {
 		
 	}
 	
-	public Page(Customer customer) {
+	public Page(CustomerVo customer) {
 		this.customer=customer;
 		client = ClientFactory.createDefault();
 		status.add(0, false);
@@ -106,11 +107,11 @@ public class Page {
 	}
 
 
-	public Customer getCustomer() {
+	public CustomerVo getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerVo customer) {
 		this.customer = customer;
 	}
 }

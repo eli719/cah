@@ -14,4 +14,12 @@
 	<listener>
 		<listener-class>com.oval.grabweb.listener.StartupListener</listener-class>
 	</listener>
+	<servlet>
+		<servlet-name>VerifyActionServlet</servlet-name>
+		<servlet-class>com.oval.grabweb.servlet.VerifyActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerifyActionServlet</servlet-name>
+		<url-pattern>/VerifyActionServlet/*</url-pattern>
+	</servlet-mapping>
 </web-app>

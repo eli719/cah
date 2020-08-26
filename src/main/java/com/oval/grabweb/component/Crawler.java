@@ -1,6 +1,7 @@
 package com.oval.grabweb.component;
 
 import com.oval.grabweb.config.Config;
+import com.oval.grabweb.vo.CustomerVo;
 
 /**
  * Crawler类 1.核心类
@@ -20,7 +21,9 @@ public class Crawler {
 
 	public Crawler(Paw paw) {
 		String name = paw.getClass().getSimpleName().replace("Impl", "").replace("Code", "");
-		this.hand = new Hand(Config.getCustomers().get(name));
+		CustomerVo customerVo = new CustomerVo();
+		customerVo.setCustomer(Config.getCustomers().get(name));
+		this.hand = new Hand(customerVo);
 		this.hand.setPaw(paw);
 	}
 

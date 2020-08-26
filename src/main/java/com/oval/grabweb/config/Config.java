@@ -10,6 +10,8 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import com.oval.grabweb.bean.Customer;
 import com.oval.grabweb.util.DateUtils;
+import com.oval.grabweb.vo.CustomerVo;
+
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -34,6 +36,9 @@ public class Config {
 	public static String BAKFILE_NAME;
 
 	public final static Map<String, Customer> customers = new HashMap<String, Customer>();
+	
+	private static  Map<String, CustomerVo> customerVos = new HashMap<String, CustomerVo>();
+
 
 	public static final List<List<String>> stockHead = new ArrayList<>();
 
@@ -67,7 +72,9 @@ public class Config {
 			} else {
 				c.setFileName(getFileName(FILE_NAME, c.getOrgCode(), c.getOrgName()));
 			}
-			customers.put(c.getOrgCode(), c);
+			CustomerVo customerVo = new CustomerVo();
+			customerVo.setCustomer(c);
+			customerVos.put(c.getOrgCode(), customerVo);
 		}
 	}
 
@@ -131,5 +138,14 @@ public class Config {
 	public static Map<String, Customer> getCustomers() {
 		return customers;
 	}
+	
+	public static void main(String[] args) {
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("a", "n");
+		System.out.println(m.hashCode());
+	}
 
+	public static Map<String, CustomerVo> getCustomerVos() {
+		return customerVos;
+	}
 }

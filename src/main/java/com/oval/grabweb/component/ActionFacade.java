@@ -14,7 +14,6 @@ import com.oval.grabweb.job.JobInfo;
  */
 public class ActionFacade {
 	private static Logger logger = Logger.getLogger(ActionFacade.class);
-	
 	public static List<Thread> runningThreads = new ArrayList<Thread>(); 
 	public static int dealerlength=0;
 	public static int runnsumlength=0;
