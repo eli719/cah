@@ -38,8 +38,8 @@ public class Hand {
 
 	}
 
-	public Hand(CustomerVo customer) {
-		this.page = new Page(customer);
+	public Hand(CustomerVo customerVo) {
+		this.page = new Page(customerVo);
 	}
 
 	public Paw getPaw() {
@@ -53,7 +53,7 @@ public class Hand {
 	public void exec() {
 		// 1.登录
 		boolean isLogin = paw.login(page);
-		Customer customer = page.getCustomer().getCustomer();
+		Customer customer = page.getCustomerVo().getCustomer();
 		logger.info("-----------" + isLogin);
 		ExecutorService e = Executors.newFixedThreadPool(4);
 		// 2.登录成功后，可以异步获取进销存数据
@@ -74,6 +74,7 @@ public class Hand {
 
 						normalCreateFiles(fileName, customer, Constant.STOCK);
 					}
+					page.getCustomerVo().getStatus().set(0, true);
 					return true;
 				}, e);
 				
@@ -92,6 +93,8 @@ public class Hand {
 
 						normalCreateFiles(fileName, customer, Constant.SALE);
 					}
+					page.getCustomerVo().getStatus().set(1, true);
+
 					return true;
 				}, e);
 
@@ -111,6 +114,7 @@ public class Hand {
 
 						normalCreateFiles(fileName, customer, Constant.PURCHASE);
 					}
+					page.getCustomerVo().getStatus().set(2, true);
 					return true;
 				}, e);
 				
@@ -162,7 +166,6 @@ public class Hand {
 		}
 		
 		//2.获取表头
-		
 		List<Integer> l = paw.titleNo();
 		List<List<String>> data = new ArrayList<>();
 		
@@ -194,7 +197,6 @@ public class Hand {
 		} catch (Exception eo) {
 			eo.printStackTrace();
 		}
-		page.getStatus().set(0, true);
 	}
 	
 	/**

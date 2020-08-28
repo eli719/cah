@@ -22,7 +22,7 @@ public class Crawler {
 	public Crawler(Paw paw) {
 		String name = paw.getClass().getSimpleName().replace("Impl", "").replace("Code", "");
 		CustomerVo customerVo = new CustomerVo();
-		customerVo.setCustomer(Config.getCustomers().get(name));
+		customerVo.setCustomer(Config.getCustomerVos().get(name).getCustomer());
 		this.hand = new Hand(customerVo);
 		this.hand.setPaw(paw);
 	}

@@ -50,7 +50,7 @@ public class Config {
 		getTitle();
 		getCustomer();
 	}
-
+	
 	/**
 	 * 读取配置文件获取所有商业信息并保存
 	 */
@@ -148,4 +148,6 @@ public class Config {
 	public static Map<String, CustomerVo> getCustomerVos() {
 		return customerVos;
 	}
+
+	
 }

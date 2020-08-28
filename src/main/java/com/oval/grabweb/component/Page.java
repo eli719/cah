@@ -21,7 +21,7 @@ public class Page {
 	
 	private CloseableHttpClient client;
 	
-	private CustomerVo customer;
+	private CustomerVo customerVo;
 	
 	private Request request;
 	
@@ -50,7 +50,7 @@ public class Page {
 	}
 	
 	public Page(CustomerVo customer) {
-		this.customer=customer;
+		this.customerVo=customer;
 		client = ClientFactory.createDefault();
 		status.add(0, false);
 		status.add(1, false);
@@ -107,11 +107,11 @@ public class Page {
 	}
 
 
-	public CustomerVo getCustomer() {
-		return customer;
+	public CustomerVo getCustomerVo() {
+		return customerVo;
 	}
 
-	public void setCustomer(CustomerVo customer) {
-		this.customer = customer;
+	public void setCustomerVo(CustomerVo customerVo) {
+		this.customerVo = customerVo;
 	}
 }

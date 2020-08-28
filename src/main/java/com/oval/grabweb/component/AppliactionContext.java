@@ -25,7 +25,7 @@ public class AppliactionContext {
 	}
 
 	public static void main(String[] args) {
-		Config.init(); 
+//		Config.init(); 
 		List<Paw> paws = new ArrayList<Paw>();
 		paws.add(new Code2345Impl());
 		for (Paw paw : paws) {
